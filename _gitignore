@@ -16,4 +16,8 @@
 !/log/.keep
 /tmp
 
-*_DS_Store
+*DS_Store
+*keep
+*keep(1)
+*_keep
+*_keep(1)
