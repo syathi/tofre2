@@ -1,0 +1,410 @@
+/* 全体のフォント指定 */
+div.font-default {
+  font-family: 'Lucida Console', 'ヒラギノ角ゴ ProN W8';
+}
+
+/* とうふれロゴ背景 */
+/*  */
+/*
+body{
+  background-image: url(./logo.png);
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: -30pt 50pt;
+}
+*/
+
+/* メニューモーダル化 */
+#modal-content{
+  display:none;
+  width:50%;
+  margin:1.5em auto 0;
+  padding:10px 20px;
+  border:2px solid #aaa;
+  background:#fff;
+  z-index:2;
+  position:fixed;
+}
+
+.modal-p{
+  margin-top:1em;
+}
+
+.modal-p:first-child{
+  margin-top:0;
+}
+
+.button-link{
+  color:#00f;
+  text-decoration:underline;
+}
+ 
+.button-link:hover{
+  cursor:pointer;
+  color:#f00;
+}
+
+/* ヘッダ */
+header {
+  font-family: monospace, 'Lucida Console', 'ヒラギノ角ゴ Std W8';
+  text-align: center;
+  width: 100%;
+  padding: 0px;
+	margin: 0px 0px 0px 0px;
+}
+/*
+header ul{
+	list-style: none;
+	background-color: antiquewhite;
+}
+header li{
+	margin-right: 30px; 
+	text-align:right;
+}
+*/
+
+/*メニュー*/
+aside{
+	margin: 250px 50px 0px -45px;
+  padding-bottom: 200%;
+ 	float: left;
+ }
+
+aside ul{ 
+	margin: 0; 
+	padding: 0; 
+	list-style: none; 
+}
+
+aside li.menuList{ 
+	display: inline; 
+	padding: 0; 
+	margin: 0; 
+  margin-bottom: -10px;
+}
+
+aside li.menuList a{
+	display: block; 
+	border: 1px solid #9F99A3;
+	-webkit-border-top-right-radius: 30px;
+	-webkit-border-bottom-right-radius: 30px;
+	-moz-border-radius-topright: 30px;
+	-moz-border-radius-bottomright: 30px;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+
+
+	background-color: #EEEEEE;
+	padding: 10px 10px;
+	text-align: right;
+	text-decoration: none;
+	color: #333;
+	width: 150px; 
+	margin: 15px 0px;
+	font-size: 17px;
+}
+aside li.menuList a:hover{
+	border: 1px solid #8593A9;
+	background-color: #9EB7DD;
+	margin-left: 20px;
+	margin-right: -20px;
+}
+
+/*メインコンテンツ*/
+#main {
+  margin: 0 auto;
+}
+
+/* ヘッダメニュー */
+#nav {
+	/*background-color: ;*/
+	width: 100%;
+}
+
+#nav {
+	margin-left: 0px;
+	color: white;
+	width: 100%;
+	margin: 0px;
+	padding: 0;
+	background-color: black;
+}
+
+#nav ul{
+	/*margin-left: 0px;*/
+	display: block;
+	padding-left: 0px;
+	letter-spacing: -.40em;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	margin: 0px;
+}
+
+#nav a {
+    color: white;
+    display: block;
+    text-decoration:none;
+    /*padding: 5px;*/
+    width: 100%;
+    height: 100%;
+}
+
+
+#nav li {
+	letter-spacing: normal;
+	display: inline-block;
+	box-sizing: border-box;
+	margin: ;
+	padding: 5px;
+	/*padding: 5px;*/
+/*	border-right: solid 4px ;*/
+	background-color: #000000;
+	/*width: 20%;*/
+}
+
+#nav li:hover {
+	background-color: rgba(100, 100, 100, 0.7);
+}
+
+/*掲示板のメニュー*/
+#blltnList { 
+  background-color: #EEEEEE;
+  margin-right: 45px;
+  margin-top: -15px;
+  text-align: right;
+}
+
+#blltnList a{
+  display: block; 
+  border: 1px solid #9F99A3;
+  -webkit-border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  
+}
+
+/* 掲示板 */
+h1 {
+  text-align: center;
+}
+div.tabbox { 
+
+    margin: 0px auto;
+    margin-top: 10px; 
+    width:400px; 
+    height:100%;
+}
+
+/* ▼ 各ボックスの配色設定 */
+div#tab1 {
+     margin: 10px auto; 
+     border: 2px solid #ffbf00; 
+     background-color: #ffbf00;
+}
+
+/*本文*/
+p#article{
+   font-family: "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+}
+
+
+/*掲示板　リプライ用　モーダルウィンドウ*/
+#modal_content{
+  width:50%;
+  margin:1.5em auto 0;
+  padding:10px 20px;
+  border:2px solid #aaa;
+  background:#fff;
+  z-index:2;
+  display: none;
+  position:fixed;
+  top:400px;
+  left:250px;
+ 
+}
+/*モーダルウィンドウの後ろの黒いところ*/
+#modal_overlay{
+  z-index:1;
+  display: none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:120%;
+  background-color:rgba(0,0,0,0.75);
+}
+
+/* donuts css */
+h1{
+	text-align: center;
+}
+
+/* refrigerators */
+.delete{
+    padding: 5px 30px;
+    font-size: 1.6em;
+    font-weight: bold;
+    background-color: #ff7;
+    color: #000;
+    
+    //角を丸く
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+
+}
+
+/* 俺でも助走つけてぶん殴るレベル */
+body {
+  /*センタリング*/
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+	text-align: center;
+}
+
+table {
+  /*テーブルをセンタリング*/
+	margin: 0 auto;
+}
+
+/* table */
+/* 表：一覧表示、詳細表示 */
+@mixin data-table {
+  font-size: 90%;
+
+  th {
+    color: #000;
+    font-weight: bold;
+  }
+  td, th {
+    padding: 5px;
+  }
+}
+
+table.list {
+  @include data-table;
+  th {
+    text-align: left;
+    background-color: #f4a460;
+  }
+  td {
+    background-color: #ffefd5;
+  }
+}
+
+table.attr {
+  @include data-table;
+  width: 100%;
+  th {
+    text-align: right;
+    background-color: #499;
+  }
+  td {
+    background-color: #cee;
+  }
+}
+
+table.concert {
+  @include data-table;
+
+  th {
+    text-align: left;
+    background-color: #4682b4;
+  }
+  td {
+    background-color: #f0ffff;
+    height: 30px;
+    border: 1.5px solid #4682b4;
+  }
+}
+
+/*concertのshow*/
+table.show {
+  tr:nth-child(odd){
+    background-color: #46a2d4;
+    color: white;
+  }
+  tr:nth-child(even){
+    background-color: #e0ffff;
+    td{
+      padding: 3px;
+    }
+  }
+  td[rowspan]{
+    background-color: #fff;
+  }
+}
+
+/*冷蔵庫一覧用*/
+table.idx1 {
+  @include data-table;
+  border-collapse: collapse;
+  border: 12px solid #85AFFD;
+}
+table.idx1 th {
+  text-align: center;
+  background-color: #FFE154;
+  font-size: 15px;
+}
+table.idx1 tr {
+  background-color: #FFF9DE;
+  border: 5px #85AFFD solid;
+}
+table.idx1 a {
+  /*セル内全体リンク化*/
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+table.idx2 {
+  @include data-table;
+  border-collapse: collapse;
+  border: 12px solid #C5FFFD;
+}
+table.idx2 th {
+  text-align: cebter;
+  background-color: #69FF90;
+  font-size: 15px;
+}
+table.idx2 tr {
+  background-color: #DDFFDD;
+  border: 5px #C5FFFD solid;
+}
+table.idx2 a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ユーザー用ページ */
+
+table.user1 {
+  @include data-table;
+  font-family: 'Lucida Console';
+  width: 20%;
+  border-collapse: separate;
+  border: 6px #85AFFD;
+}
+table.user1 th {
+  text-align: center;
+  background-color: #FFFF00;
+  border: 1px;
+  font-size: 15px;
+}
+table.user1 tr {
+  background-color: #FFF9DE;
+  border: 5px #85AFFD;
+}
+table.user1 a {
+  /*セル内全体リンク化*/
+  display: block;
+  width: 100%;
+  height: 100%;
+}

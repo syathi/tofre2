@@ -1,0 +1,23 @@
+<nav>
+  <div id="modal-content">
+  <% if user_signed_in? %>
+    <ul id="nav">
+    <li><strong><%= link_to current_user.username+'さん', top_show_path %></strong></li>
+    <li><%= link_to '冷蔵庫', refrigerators_path %></li>
+    <li><%= link_to '掲示板', bulletin_boards_path %></li>
+    <li><%=link_to "レシピ", donuts_path %></li>
+    <!--<li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { confirm: 'ログアウトしますか？' } %></li>-->
+    <li><%= link_to image_tag('a.png'), destroy_user_session_path, method: :delete, data: { confirm: 'ログアウトしますか？' } %></li>
+    </ul>
+    <br />
+  <% end %>
+
+  <p><a id="modal-close" class="button-link">閉じる</a></p>
+  <!-- モーダルウィンドウのコンテンツ終了 -->
+  </div>
+
+  <p><a id="modal-open"><%= image_tag("modal.png") %></a></p>
+  <!-- ここまでモーダルウィンドウ -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="modal.js"></script>
+</nav>

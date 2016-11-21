@@ -1,0 +1,28 @@
+// Place all the styles related to the refrigerators controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.delete{
+    padding: 5px 30px;
+    font-size: 1.6em;
+    font-weight: bold;
+    background-color: #ff7;
+    color: #000;
+    
+    //角を丸く
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+
+}
+
+/*
+*auther:やりた
+*/
+body{//センタリング
+	text-align: center;
+}
+
+table{//テーブルをセンタリング
+	margin: 0 auto;
+}

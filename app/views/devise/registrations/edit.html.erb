@@ -1,0 +1,53 @@
+<div class="user1">
+<h2>登録情報を変更する</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <p><%= f.label :username %><br />
+  <%= f.text_field :username %></p>
+  
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+  <br />
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :password %><br />
+    <i>（変更しない場合は何も入力せず空白にしてください。）</i><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+  <br />
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+  <br />
+
+  <div class="field">
+    <%= f.label :current_password %><br />
+    <i>（現在のパスワードを入れてください。）</i><br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
+  <br />
+
+  <div class="actions">
+    <%= f.submit "更新する" %>
+  </div>
+  <br />
+<% end %>
+
+<h3>アカウントを削除したい場合は下記をクリック</h3>
+<h3>1発で消し飛びます！気をつけて！</h3>
+
+<p><%= button_to "それでも削除します。", registration_path(resource_name), data: { confirm: "本当に良いんですね？" }, method: :delete %></p>
+
+<%= render 'shared/top_link' %>
+</div>

@@ -1,0 +1,21 @@
+<div class="font-default">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Refrigerator:</strong>
+  <%= @reply.refrigerator %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @reply.user %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @reply.content %>
+</p>
+
+<%= link_to '編集', edit_reply_path(@reply) %> |
+<%= link_to '戻る', replies_path %>
+</div>

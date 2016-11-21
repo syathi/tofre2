@@ -1,0 +1,9 @@
+<div class="font-default">
+<% if user_signed_in? %>
+	<h1>ようこそ、<%= current_user.username %>さん</h1>
+	<p>とうふれのトップページです。</p>
+<% else %>
+	<h1>ようこそ</h1>
+	<p>とうふれのトップページです。</p>
+<% end%>
+</div>
