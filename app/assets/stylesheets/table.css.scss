@@ -1,0 +1,128 @@
+/* 表：一覧表示、詳細表示 */
+@mixin data-table {
+  font-size: 90%;
+
+  th {
+    color: #000;
+    font-weight: bold;
+  }
+  td, th {
+    padding: 5px;
+  }
+}
+
+table.list {
+  @include data-table;
+  th {
+    text-align: left;
+    background-color: #f4a460;
+  }
+  td {
+    background-color: #ffefd5;
+  }
+}
+
+table.attr {
+  @include data-table;
+  width: 100%;
+  th {
+    text-align: right;
+    background-color: #499;
+  }
+  td {
+    background-color: #cee;
+  }
+}
+
+table.concert {
+  @include data-table;
+
+  th {
+    text-align: left;
+    background-color: #4682b4;
+  }
+  td {
+    background-color: #f0ffff;
+    height: 30px;
+    border: 1.5px solid #4682b4;
+  }
+}
+
+/*concertのshow*/
+table.show {
+  tr:nth-child(odd){
+    background-color: #46a2d4;
+    color: white;
+  }
+  tr:nth-child(even){
+    background-color: #e0ffff;
+    td{
+      padding: 3px;
+    }
+  }
+  td[rowspan]{
+    background-color: #fff;
+  }
+}
+
+/*冷蔵庫一覧用*/
+table.idx1 {
+  @include data-table;
+  border-collapse: collapse;
+  border: 12px solid #85AFFD;
+  th {
+    text-align: center;
+    background-color: #FFE154;
+    font-size: 15px;
+  }
+  tr {
+    background-color: #FFF9DE;
+    border: 5px #85AFFD solid;
+
+  }
+
+  a{/*セル内全体リンク化*/
+    display: block;
+    width: 100%;
+    hight: 100%;
+  }
+  
+}
+
+
+table.idx2 {
+  @include data-table;
+  border-collapse: collapse;
+  border: 12px solid #C5FFFD;
+  th {
+    text-align: cebter;
+    background-color: #69FF90;
+    font-size: 15px;
+  }
+  tr {
+    background-color: #DDFFDD;
+    border: 5px #C5FFFD solid;
+
+  }
+
+  a{
+    display: block;
+    width: 100%;
+    hight: 100%;
+  }
+
+}
+
+/*
+td.switch {
+
+}
+
+a:hover {
+  background-color: #ffcccc;
+  display: block; 
+  width: 100%; 
+  height: 100%;
+
+}
+*/

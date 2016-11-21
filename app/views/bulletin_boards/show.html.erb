@@ -1,0 +1,41 @@
+<!--
+  
+ #############################################
+  
+            show.html.erb
+            
+ #############################################
+ 
+ 
+ -->
+
+
+
+<div class="tabbox">
+
+<p class="tabs">
+      <a href="#tab1" class="tab1" onclick="ChangeTab('tab1'); return false;">全体公開</a>
+      <a href="#tab2" class="tab2" onclick="ChangeTab('tab2'); return false;">限定公開</a>
+   </p>
+   <div id="tab1" class="tab">
+      <% @fridge1.each do |fridge| %>
+        <%= current_user.username %>の<%= fridge.name %>がやばみ　期限:<%= fridge.deadline %>
+      <% end %>
+   </div>
+   
+   
+   <div id="tab2" class="tab">
+      <% @fridge2.each do |fridge | %>
+        <%= current_user.username %>の<%= fridge.name %>がやばみ 購入日:<%= fridge.purchase %>
+      <% end %>　
+   </div>
+   
+   
+</div><!-- tabbox -->
+
+<!-- ページを開いた際の最初に表示されるタブの選択 -->
+<script type="text/javascript">
+   ChangeTab('tab1');
+</script>
+
+<!-- タブメニュー実装　HTML文 -->

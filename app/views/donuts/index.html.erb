@@ -1,0 +1,23 @@
+<div class="font-default">
+<p id="notice"><%= notice %></p>
+
+<%= render 'shared/donuts_header' %>
+
+<h1>レシピ検索</h1>
+
+<%= form_tag :search_donuts, method: :get do %>
+  <p><%= text_field_tag "q", params[:q] %><%= submit_tag "検索" %></p>
+<% end %>
+
+<table>
+  <% @donuts.each do |donut| %>
+    <tr>
+      <td><%= donut_image_tag donut , width: 100 %></td>
+      <td style="width: 300px; word-break: break-all; vertical-align: top; border-bottom-style: dashed; border-color: orange;"><h2><%= link_to "#{donut.title}", donut %></h2><%= donut.material %></td>
+    </tr>
+
+  <% end %>
+</table>
+
+<br>
+</div>

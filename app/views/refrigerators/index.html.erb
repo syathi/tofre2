@@ -1,0 +1,74 @@
+<div class="font-default">
+<p id="notice"><%= notice %></p>
+
+<img src="momen.jpg" width="3%"><font size="+3"><%= current_user.username %>さんの冷蔵庫</font><img src="kinu.jpg" width="5%"><br>
+<font size="+1"><%= link_to '中身追加', new_refrigerator_path%>｜<%= link_to '中身削除', refrigerators_path(dele: 1) %></font>
+
+
+<%= form_tag(delete_refrigerators_path, method: "get") do %>
+
+<table class="idx1">
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>残量</th>
+      <th>賞味(費)期限</th>
+      <th>状況</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @refrigerators1.each do |refrigerator| %>
+
+      <tr>
+        <td><% if params[:dele] %><%= check_box_tag 'candidate[id][]', refrigerator.id %><% end %>
+        <%= refrigerator.name %></td>
+        <td><%= link_to refrigerator.quantity, switching_refrigerator_path(refrigerator) %></td>
+        <td><%= refrigerator.deadline %></td>
+        <td><% if refrigerator.release == 0 %><%= link_to '非公開', switching_refrigerator_path(refrigerator, rele: 1) %>
+            <% else %><%= link_to '公開', switching_refrigerator_path(refrigerator, rele: 1) %><% end %></td>
+        <td><%= link_to '編集', edit_refrigerator_path(refrigerator) %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+<br>
+
+<table class="idx2">
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>残量</th>
+      <th>購入日から</th>
+      <th>状況</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @refrigerators2.each do |refrigerator| %>
+      <tr>
+        <td><% if params[:dele] %><%= check_box_tag 'candidate[id][]', refrigerator.id %><% end %>
+        <%= refrigerator.name %></td>
+        <td><%= link_to refrigerator.quantity, switching_refrigerator_path(refrigerator) %></td>
+        <td><%= (Date.today - refrigerator.purchase).to_i %>日経過</td>
+        <td><% if refrigerator.release == 0 %><%= link_to '非公開', switching_refrigerator_path(refrigerator, rele: 1) %>
+            <% else %><%= link_to '公開', switching_refrigerator_path(refrigerator, rele: 1) %><% end %></td>
+        <td><%= link_to '編集', edit_refrigerator_path(refrigerator) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if params[:dele] %>
+<p>
+<%= submit_tag "削除", :class => "delete", data: { confirm: '削除しますか？' } %>
+<% end %>
+
+<% end %>
+
+<p>
+</div>

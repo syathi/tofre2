@@ -1,0 +1,33 @@
+<div class="font-default">
+<p id="notice"><%= notice %></p>
+
+<h1>リスト一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>冷蔵庫</th>
+      <th>利用者</th>
+      <th>イベント</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lists.each do |list| %>
+      <tr>
+        <td><%= list.refrigerator.id %></td>
+        <td><%= list.user.username %></td>
+        <td><%= list.event %></td>
+        <td><%= link_to '詳細', list %></td>
+        <td><%= link_to '編集', edit_list_path(list) %></td>
+        <td><%= link_to '削除', list, method: :delete, data: { confirm: 'いいんですか？消しますよ？' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新規リスト', new_list_path %>
+</div>

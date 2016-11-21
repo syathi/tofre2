@@ -1,0 +1,23 @@
+<div class="font-default">
+<p id="notice"><%= notice %></p>
+
+<%= render 'shared/donuts_header' %>
+
+<h1>投稿・編集</h1>
+
+
+<%= link_to 'レシピ投稿', new_donut_path %>
+
+<table>
+  <% @donuts.each do |donut| %>
+    <tr>
+      <td><%= donut_image_tag donut , width: 100 %></td>
+      <td style="width: 300px; word-break: break-all; vertical-align: top; border-bottom-style: dashed; border-color: orange;"><h2><%= link_to "#{donut.title}", donut %></h2><%= donut.material %></td>
+      <td><%= link_to '編集', edit_donut_path(donut) %></td>
+      <td><%= link_to '削除', donut_path(donut), method: :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
+</div>

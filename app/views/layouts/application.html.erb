@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>とうふれ</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
+  <!-- ビューポートの設定 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- スタイルシートの読み込み -->
+  <link href="modal.css" rel="stylesheet">
+</head>
+<body>
+	<header>
+    <nav>
+    <div id="modal-content">
+      <% if user_signed_in? %>
+        <!-- モーダルウィンドウのコンテンツ開始 -->
+        <ul id="nav">
+          <li><strong><%= link_to current_user.username+'さん', top_show_path %></strong></li>
+          <li><%= link_to '冷蔵庫', refrigerators_path %></li>
+          <li><%= link_to '掲示板', bulletin_boards_path %></li>
+          <li><%=link_to "レシピ", donuts_path %></li>
+        </ul>
+        <br />
+      <% end %>
+      <p><a id="modal-close" class="button-link">閉じる</a></p>
+      <!-- モーダルウィンドウのコンテンツ終了 -->
+    </div>
+    <p>
+      <a id="modal-open"><%= image_tag("modal.png", :class => "setPosition", :width => '200', :height => '200' ) %></a>
+      <%= image_tag("banner.png", :width => '800', :height => '300') %>
+      <%= link_to image_tag('logout.png', :width => '300', :height => '300'), destroy_user_session_path, method: :delete, data: { confirm: 'ログアウトしますか？' } %>
+    </p>
+    <!-- ここまでモーダルウィンドウ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="modal.js"></script>
+    </nav>
+
+  </header>
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+  <main id="contents" >
+    <%= yield %>
+  </main>
+</body>
+</html>
