@@ -1,0 +1,36 @@
+<div class="font-default">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @refrigerator.user %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @refrigerator.name %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @refrigerator.quantity %>
+</p>
+
+<p>
+  <strong>Purchase:</strong>
+  <%= @refrigerator.purchase %>
+</p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= @refrigerator.deadline %>
+</p>
+
+<p>
+  <strong>release:</strong>
+  <%= @refrigerator.release %>
+</p>
+
+<%= link_to '編集', edit_refrigerator_path(@refrigerator) %> |
+<%= link_to '戻る', refrigerators_path %>
+</div>
