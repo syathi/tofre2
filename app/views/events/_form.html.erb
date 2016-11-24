@@ -1,0 +1,43 @@
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <% @myrefri.each do |refrigerator| %>
+      <%= check_box_tag 'refri[id][]', refrigerator.id %>
+      <%= refrigerator.name %><br>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :place %><br>
+    <%= f.text_area :place %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.datetime_select :date %>
+  </div>
+  <div class="field">
+    <%= f.label :upper_num %><br>
+    <%= f.number_field :upper_num %>
+  </div>
+  <div class="field">
+    <%= f.label :lower_num %><br>
+    <%= f.number_field :lower_num %>
+  </div>
+  <div class="actions">
+    <% if current_page?(new_event_path) %>
+      <%= f.submit "新規作成"%>
+    <% else %>
+      <%= f.submit "イベントの更新"%>
+    <% end %>
+  </div>
+<% end %>

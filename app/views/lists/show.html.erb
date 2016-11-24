@@ -1,0 +1,21 @@
+<div class="font-default">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Refrigerator:</strong>
+  <%= @list.refrigerator %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @list.user %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @list.event %>
+</p>
+
+<%= link_to '編集', edit_list_path(@list) %> |
+<%= link_to '戻る', lists_path %>
+</div>
