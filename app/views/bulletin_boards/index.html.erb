@@ -1,11 +1,10 @@
 <div class="tabbox">
     <h1>掲示板</h1>
     <select name="sort_menu" id="sort_menu">
-        <option id="public_order" value="0" selected>公開順</option>
+        <option id="public_order" value=0 src="/bulletin_boards" selected>公開順</option>
         <option id="user_name_order" value="1">人の名前順</option>
         <option id="deadline_order" value="2">期限近い順</option>
     </select> 
-
     <div id="tab1" class="tab"></br>
         <% if @public_foods || @public_fresh then %>
             <table>
@@ -61,17 +60,17 @@
                                 <div style="display:none;">2</div>
                             <% end %>
                         </td>
+                         <td class="reply">
+                            <div class="rep">ﾘﾌﾟ</div>
+                            <ul class="reply_list">
+                            <% fridge.replies.each do |re| %>
+                                <li>
+                                    [返]<%= re.user.username %>：<%= re.content %>
+                                </li>
+                            <% end %>
+                            </ul>
+                        </td>
                     </tr> 
-                        <% fridge.replies.each do |re| %>
-                            <tr>
-                                [返]<%= re.user.username %>：<%= re.content %>
-                            </tr>
-                        <% end %>
-                        <% if fridge.id == params[:id].to_i %>
-                            <tr>
-                                <%= render "replies/new" , fri: fridge %>
-                            </tr>
-                        <% end %>
                 <% end %>
             </table>
             <p>-----------------------------------------------------------</p>
@@ -129,17 +128,16 @@
                                 <div style="display:none;">2</div>
                             <% end %>
                         </td>
+                        <td class="reply">
+                            <div>ﾘﾌﾟ</div>
+                            <% fridge.replies.each do |re| %>
+                                <p>
+                                    [返]<%= re.user.username %>：<%= re.content %>
+                                </p>
+                            <% end %>
+                        </td>
                     </tr>
-                    <% fridge.replies.each do |re| %>
-                        <tr>
-                            [返]<%= re.user.username %>：<%= re.content %><br>
-                        </tr>
-                    <% end %>
-                    <% if fridge.id == params[:id].to_i %>
-                        <tr>
-                            <%= render "replies/new" , fri: fridge %>
-                        </tr>
-                    <% end %>
+                    
                 <% end %>
             </table>
         <% else %>
