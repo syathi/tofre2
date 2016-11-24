@@ -1,0 +1,31 @@
+<div class="font-default">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Refrigerator:</strong>
+  <%= @event.refrigerator %>
+</p>
+
+<p>
+  <strong>Place:</strong>
+  <%= @event.place %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @event.date %>
+</p>
+
+<p>
+  <strong>Upper num:</strong>
+  <%= @event.upper_num %>
+</p>
+
+<p>
+  <strong>Lower num:</strong>
+  <%= @event.lower_num %>
+</p>
+
+<%= link_to '編集', edit_event_path(@event) %> |
+<%= link_to '戻る', events_path %>
+</div>

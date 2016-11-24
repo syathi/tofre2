@@ -1,0 +1,48 @@
+<%= form_for(@donut) do |f| %>
+  <% if @donut.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@donut.errors.count, "error") %> このレシピは保存出来ませんでした。:</h2>
+
+      <ul>
+      <% @donut.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_area :title %>
+  </div>
+  <div class="field">
+    <%= f.label :material %><br>
+    <%= f.text_area :material %>
+  </div>
+  <div class="field">
+
+    <meta charset="UTF-8">
+  　<link href="css/picStyle.css" rel="stylesheet" type="text/css">
+  　<link href="css/bootstrap.min.js" type="text/css"></link>
+    <script type="text/javascript" src="./javascript/jquery-3.0.0.minå.js"></script>
+　  <script type="text/javascript" src="javascript/picExh.js"></script>
+  　<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
+
+    <%= f.label :image %><br>
+    <%= donut_image_tag @donut , width: 150 %><br>
+
+    <input type="hidden" name="MAX_FILE_SIZE" value="0" />
+    <%= f.file_field :image ,:id =>"0", :onchange => "change();" %>
+
+  </div>
+
+  <div class="actions">
+    <% if current_page?(new_donut_path) %>
+      <%= f.submit "新規作成"%>
+    <% else %>
+      <%= f.submit "レシピの更新"%>
+    <% end %>
+  </div>
+<% end %>
