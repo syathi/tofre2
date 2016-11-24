@@ -24,6 +24,15 @@
         <td><%= link_to '詳細', event %></td>
         <td><%= link_to '編集', edit_event_path(event) %></td>
         <td><%= link_to '削除', event, method: :delete, data: { confirm: 'いいんですか？消しますよ？' } %></td>
+        <td>
+          <% if event.refrigerators.first.user != current_user %><!--もしもイベ主催者でなかったら...by菅谷-->
+            <% if @list = List.find_by(event_id: event.id, user_id: current_user.id, delete_flag: false) %>
+              <%= link_to '[参加取消]', list_path(@list), method: :delete %>
+            <% else %>
+              <%= link_to '[参加]', lists_path(eid: event.id), method: :post %>
+            <% end %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

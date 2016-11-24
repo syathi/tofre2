@@ -46,7 +46,7 @@
                         <td class="foods"><%= fridge.name %></td>
                         <td class="deadline"><%= fridge.deadline %></td>
                         <td class="heart">
-                            <% if @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id) %>
+                            <% if @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id, delete_flag: false) %>
                                 <div>[♥︎]</div>
                                 <div style="display:none;">1</div>
                                 <div style="display:none;"><%= list_path(@list) %></div>
@@ -113,7 +113,7 @@
                         <td class="foods"><%= fridge.name %></td>
                         <td class="purchase"><%= fridge.purchase %></td>
                         <td class="heart">
-                             <% if @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id) %>
+                             <% if @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id, delete_flag: false) %>
                                 <div>[♥︎]</div>
                                 <div style="display:none;">1</div>
                                 <div style="display:none;"><%= list_path(@list) %></div>

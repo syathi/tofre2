@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :addition]
 
   # GET /events
   # GET /events.json
@@ -10,6 +10,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @myrefri = Refrigerator.where(user_id: current_user.id).where(event_id: nil)
   end
 
   # GET /events/new
@@ -20,6 +21,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    @myrefri = Refrigerator.where(user_id: current_user.id).where(event_id: [nil, @event.id])
   end
 
   # POST /events
@@ -65,6 +67,16 @@ class EventsController < ApplicationController
       format.html { redirect_to events_url, notice: 'イベントを削除しました。' }
       format.json { head :no_content }
     end
+  end
+
+  def addition
+    @refrigerator = Refrigerator.find(params[:refri])
+    if params[:dele]
+      @refrigerator.update_attributes(event_id: nil)
+    else
+      @refrigerator.update_attributes(event_id: @event.id)
+    end
+    redirect_to action: "show"
   end
 
   private

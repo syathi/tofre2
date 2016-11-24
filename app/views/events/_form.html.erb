@@ -13,7 +13,7 @@
 
   <div class="field">
     <% @myrefri.each do |refrigerator| %>
-      <%= check_box_tag 'refri[id][]', refrigerator.id %>
+      <%= check_box_tag 'refri[id][]', refrigerator.id, refrigerator.event %>
       <%= refrigerator.name %><br>
     <% end %>
   </div>

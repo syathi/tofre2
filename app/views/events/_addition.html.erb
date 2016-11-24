@@ -1,0 +1,4 @@
+<% @myrefri.each do |refrigerator| %>
+    <%= refrigerator.name %>
+    <%= link_to '追加', addition_event_path(eve, refri: refrigerator.id) %><br>
+<% end %>
