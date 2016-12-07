@@ -1,86 +1,111 @@
-
+<% if user_signed_in? %>
 
 <div class="font-default">
 <h1>こんにちは、<%= current_user.username %>さん</h1>
 
 <h3><p>とうふれのユーザー用ページです。</p></h3>
-<%= link_to 'プロフィール変更', edit_user_registration_path %>
 
-<table class="user1">
-  <h3>利用者一覧</h3>
-  <thead>
-    <tr>
-      <th>名前</th>
-      <th>フォロー</th>
-    </tr>
-  </thead>
-  <tbody>
-  	<% @users.each do |user| %>
-	<tr>
-		<td><%= user.username %></td>
-		<td><%= link_to 'フォロー', follow_top_path(user) %></td>
-    <% end %>
-	</tr>
-  </tbody>
-</table>
+<script src="tabs.js"></script>
+<ul class="tab_user">
+  <section class="color-7">
+    <nav class="cl-effect-4">
+      <li class="select"><h3>フレンド</li>
+      <li class="select"><h3>通知</h3></li>
+      <li class="select"><h3>利用者一覧</h3></li>
+      <li class="select"><h3><%= link_to '管理', edit_user_registration_path %></h3></li>
+    </nav>
+  </section>
+</ul>
 
-<br>
-
-<table class="user1">
-  <h3>フォロー申請中</h3>
-  <thead>
-    <th>名前</th>
-    <th>申請状況</th>
-  </thead>
-  <tbody>
-    <% current_user.following.each do |user| %>
-    <% unless current_user.followed_by?(user) %>
-    <tr>
-      <td><%= user.username %></td>
-      <td><%= link_to '取り消し', nofollow_top_path(user) %></td>
+<ul class="content">
+  <li>
+    <table class="user1">
+    <h3>フレンド</h3>
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.following.each do |user| %>
+      <% if current_user.followed_by?(user) %>
+      <tr>
+        <td><%= user.username %></td>
+        <td><%= link_to 'ブロック', block_top_path(user) %></td>
+      </tr>
       <% end %>
-    </tr>
-  </tbody>	
-<% end %>
-</table>
-
-<br>
-
-<table class="user1">
-  <h3>フォロリク</h3>
-  <thead>
-    <th>名前</th>
-    <th>申請状況</th>
-  </thead>
-  <tbody>
-    <% current_user.followed.each do |user| %>
-    <% unless current_user.following?(user) %><%= user.username %>
-    <tr>
-      <td><%= link_to 'フォロー', follow_top_path(user) %></td>
-      <td><%= link_to '拒否', norefollow_top_path(user) %></td>
-      <% end %>
-    </tr>
-  </tbody>
-  <% end %>
-</table>
-
-<br>
-
-<table class="user1">
-  <h3>フレンド</h3>
-  <thead>
-    <th>名前</th>
-    <th>ステータス</th>
-  </thead>
-  <tbody>
-    <% current_user.following.each do |user| %>
-    <% if current_user.followed_by?(user) %>
-    <tr>
-      <td><%= user.username %></td>
-      <td><%= link_to 'ブロック', block_top_path(user) %></td>
-    </tr>
+    </tbody>
     <% end %>
-  </tbody>
-  <% end %>
-</table>
+    </table>
+  </li>
+  <li class="hide">
+    <table class="user1">
+    <h3>フォロー申請中</h3>
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>申請状況</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.following.each do |user| %>
+      <% unless current_user.followed_by?(user) %>
+      <tr>
+        <td><%= user.username %></td>
+        <td><%= link_to '取り消し', nofollow_top_path(user) %></td>
+        <% end %>
+      </tr>
+    </tbody>  
+    <% end %>
+    </table>
+    <br>
+
+    <table class="user1">
+    <h3>フォロリク</h3>
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>申請状況</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.followed.each do |user| %>
+      <% unless current_user.following?(user) %><%= user.username %>
+      <tr>
+        <td><%= link_to 'フォロー', follow_top_path(user) %></td>
+        <td><%= link_to '拒否', norefollow_top_path(user) %></td>
+        <% end %>
+      </tr>
+    </tbody>
+    <% end %>
+    </table>
+  </li>
+  <li class="hide">
+    <table class="user1">
+    <h3>利用者一覧</h3>
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>フォロー</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <% if user.username != current_user.username %>
+        <tr>
+          <td><%= user.username %></td>
+          <td><%= link_to 'フォロー', follow_top_path(user) %></td>  
+        <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+  </li>
+  <li class="hide"></li>
+</ul>
 </div>
+
+<% else %>
+  <h2>ログインしてください</h2>
+<% end %>

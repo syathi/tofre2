@@ -1,23 +1,22 @@
-<div class="font-default">
 <p id="notice"><%= notice %></p>
 
+<h1>レシピ</h1>
 <%= render 'shared/donuts_header' %>
+<div class="right">
+	<%= form_tag :search_donuts, method: :get do %>
+  	<p><%= text_field_tag "q", params[:q] %><%= submit_tag "検索" %></p>
+	<% end %>
+	<%= link_to 'レシピ投稿', new_donut_path %>
+</div>
 
-<h1>レシピ検索</h1>
-
-<%= form_tag :search_donuts, method: :get do %>
-  <p><%= text_field_tag "q", params[:q] %><%= submit_tag "検索" %></p>
-<% end %>
-
-<table>
+<table class="donutslist">
   <% @donuts.each do |donut| %>
     <tr>
-      <td><%= donut_image_tag donut , width: 100 %></td>
-      <td style="width: 300px; word-break: break-all; vertical-align: top; border-bottom-style: dashed; border-color: orange;"><h2><%= link_to "#{donut.title}", donut %></h2><%= donut.material %></td>
+      <td><%= donut_image_tag donut , width: 160, height:160 %></td>
+      <td style="width: 300px; word-break: break-all; vertical-align: top; border-bottom-style: dashed; border-color: orange;">
+      	<h2><%= link_to "#{donut.title}", donut %></h2>
+      	<%= donut.material %>
+      </td>
     </tr>
-
   <% end %>
 </table>
-
-<br>
-</div>

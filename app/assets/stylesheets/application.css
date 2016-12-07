@@ -1,18 +1,46 @@
-/* 全体のフォント指定 */
-div.font-default {
+*{
+  margin: 0;
+  padding: 0;
   font-family: 'Lucida Console', 'ヒラギノ角ゴ ProN W8';
 }
-
-/* とうふれロゴ背景 */
-/*  */
-/*
-body{
-  background-image: url(./logo.png);
-  background-repeat: no-repeat;
-  background-size: 50%;
-  background-position: -30pt 50pt;
+/* レシピ */
+div.right {
+  width: 100%;
+  margin: 20px;
+  padding: 0px;
+  text-align: right;
 }
-*/
+table.donutslist {
+  width: 100%;
+}
+table.donutslist td{
+  padding: 0;
+}
+.tab2 {
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+  font-size: 18px;
+  overflow: hidden;
+}
+.tab2 li {
+  background: #FFFFFF;
+  display: inline-block;
+  width: 20%;
+  padding: 0px;
+  float: center;
+  margin-right: 1px;
+  list-style-type: none;
+}
+.tab2 li.select {
+  /*background: #00FFFF;*/
+  width: 20%;
+  display: inline-block;
+}
+.content li {
+  background: #FFFFFF;
+  list-style-type: none;
+  padding: 0px;
+}
 
 /* メニューモーダル化 */
 #modal-content{
@@ -44,13 +72,30 @@ body{
   color:#f00;
 }
 
+/* body幅の固定 */
+#wrapper {
+  width: 600px;
+  margin: 0 auto;
+}
+
+/* ヘッダ画像の位置指定 */
+div.modalimage {
+  text-align: left;
+}
+div.bannerimage {
+  text-align: center;
+}
+div.logoutimage {
+  text-align: right;
+}
+
 /* ヘッダ */
 header {
   font-family: monospace, 'Lucida Console', 'ヒラギノ角ゴ Std W8';
   text-align: center;
   width: 100%;
-  padding: 0px;
-	margin: 0px 0px 0px 0px;
+  padding: 10px;
+	margin: 10px;
 }
 /*
 header ul{
@@ -155,7 +200,7 @@ aside li.menuList a:hover{
 	letter-spacing: normal;
 	display: inline-block;
 	box-sizing: border-box;
-	margin: ;
+	margin: 0;
 	padding: 5px;
 	/*padding: 5px;*/
 /*	border-right: solid 4px ;*/
@@ -192,17 +237,16 @@ h1 {
   text-align: center;
 }
 div.tabbox { 
-
     margin: 0px auto;
-    margin-top: 10px; 
-    width:400px; 
+    padding: 10px;
+    width:100%; 
     height:100%;
 }
 
 /* ▼ 各ボックスの配色設定 */
 div#tab1 {
      margin: 10px auto; 
-     border: 2px solid #ffbf00; 
+     border: 6px solid #FFFFFF; 
      background-color: #ffbf00;
 }
 
@@ -214,7 +258,7 @@ p#article{
 
 /*掲示板　リプライ用　モーダルウィンドウ*/
 #modal_content{
-  width:50%;
+  width:25%;
   margin:1.5em auto 0;
   padding:10px 20px;
   border:2px solid #aaa;
@@ -222,8 +266,8 @@ p#article{
   z-index:2;
   display: none;
   position:fixed;
-  top:400px;
-  left:250px;
+  top: 100;
+  left:50;
  
 }
 /*モーダルウィンドウの後ろの黒いところ*/
@@ -261,11 +305,13 @@ h1{
 /* 俺でも助走つけてぶん殴るレベル */
 body {
   /*センタリング*/
-  margin: 0;
-  padding: 0;
   width: 100%;
   height: 100%;
-	text-align: center;
+  text-align: center; 
+}
+
+body a { 
+  text-decoration: none; 
 }
 
 table {
@@ -344,17 +390,27 @@ table.show {
 /*冷蔵庫一覧用*/
 table.idx1 {
   @include data-table;
+  width: 90%;
   border-collapse: collapse;
-  border: 12px solid #85AFFD;
+  border: 6px solid #85AFFD;
+  font-size: 18px;
 }
 table.idx1 th {
   text-align: center;
+  margin: 5px 10px;
+  padding: 0px 0px;
   background-color: #FFE154;
-  font-size: 15px;
+  border: 6px #85AFFD solid;
 }
 table.idx1 tr {
   background-color: #FFF9DE;
-  border: 5px #85AFFD solid;
+  padding: 30px 0px;
+  border: 6px #85AFFD solid;
+}
+table.idx1 td {
+  background-color: #FFF9DE;
+  padding: 30px 0px;
+  border: 6px #85AFFD solid;
 }
 table.idx1 a {
   /*セル内全体リンク化*/
@@ -365,19 +421,30 @@ table.idx1 a {
 
 table.idx2 {
   @include data-table;
+  width: 90%;
   border-collapse: collapse;
-  border: 12px solid #C5FFFD;
+  border: 6px solid #85AFFD;
+  font-size: 18px;
 }
 table.idx2 th {
-  text-align: cebter;
-  background-color: #69FF90;
-  font-size: 15px;
+  text-align: center;
+  margin: 5px 10px;
+  padding: 0px 0px;
+  background-color: #FFE154;
+  border: 6px #85AFFD solid;
 }
 table.idx2 tr {
-  background-color: #DDFFDD;
-  border: 5px #C5FFFD solid;
+  background-color: #FFF9DE;
+  padding: 30px 0px;
+  border: 6px #85AFFD solid;
+}
+table.idx2 td {
+  background-color: #FFF9DE;
+  padding: 30px 0px;
+  border: 6px #85AFFD solid;
 }
 table.idx2 a {
+  /*セル内全体リンク化*/
   display: block;
   width: 100%;
   height: 100%;
@@ -388,7 +455,8 @@ table.idx2 a {
 table.user1 {
   @include data-table;
   font-family: 'Lucida Console';
-  width: 20%;
+  width: 100%;
+  padding: 10px 10px;
   border-collapse: separate;
   border: 6px #85AFFD;
 }
@@ -407,4 +475,120 @@ table.user1 a {
   display: block;
   width: 100%;
   height: 100%;
+}
+.tab_user {
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+  font-size: 18px;
+  overflow: hidden;
+}
+.tab_user li {
+  background: #FFFFFF;
+  display: inline-block;
+  width: 20%;
+  padding: 0px;
+  float: left;
+  margin-right: 0px;
+  list-style-type: none;
+}
+.tab_user li.select {
+  /*background: #00FFFF;*/
+  width: 20%;
+  display: inline-block;
+}
+.content li {
+  background: #FFFFFF;
+  list-style-type: none;
+  padding: 0px;
+}
+.hide {
+  display: none;
+}
+.right {
+  width: 95%;
+  font-size: 18px;
+  text-align: right;
+}
+
+/* ページ内タブ */
+.tab {
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+  font-size: 18px;
+  overflow: hidden;
+}
+.tab li {
+  background: #FFFFFF;
+  display: inline-block;
+  width: 20%;
+  padding: 0px;
+  float: left;
+  margin-right: 1px;
+  list-style-type: none;
+}
+.tab li.select {
+  /*background: #00FFFF;*/
+  width: 20%;
+  display: inline-block;
+}
+.content li {
+  background: #FFFFFF;
+  list-style-type: none;
+  padding: 0px;
+}
+.hide {
+  display: none;
+}
+.right {
+  width: 95%;
+  font-size: 18px;
+  text-align: right;
+}
+
+/* 可読性変更 */
+/* 冷蔵庫内タブのエフェクト */
+nav li {
+  position: relative;
+  display: inline-block;
+  margin: 15px 25px;
+  outline: none;
+  color: #000000;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 1px;
+  font-family: 'ヒラギノ角ゴ ProN W8';
+  font-weight: 400;
+  font-size: 1.00em;
+}
+
+nav li:hover, nav li:focus {
+  outline: none;
+}
+.cl-effect-4 li {
+  padding: 0 0 10px;
+}
+
+.cl-effect-4 li::after {
+  position: absolute;
+  top: 80%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #00FFFF;
+  content: '';
+  opacity: 0;
+  -webkit-transition: height 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+  -moz-transition: height 0.3s, opacity 0.3s, -moz-transform 0.3s;
+  transition: height 0.3s, opacity 0.3s, transform 0.3s;
+  -webkit-transform: translateY(-10px);
+  -moz-transform: translateY(-10px);
+  transform: translateY(-10px);
+}
+
+.cl-effect-4 li:hover::after, .cl-effect-4 li:focus::after {
+  height: 5px;
+  opacity: 1;
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  transform: translateY(0px);
 }

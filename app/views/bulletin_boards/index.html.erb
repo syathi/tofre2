@@ -7,12 +7,13 @@
     </select> 
     <div id="tab1" class="tab"></br>
         <% if @public_foods || @public_fresh then %>
-            <table>
+            <table border="1">
                 <tr>
-                    <th class="arrow_header"></th>
+                    <th class="arrow_header">返信</th>
                     <th class="user_name_header">ユーザ名</th>
                     <th class="foods_header">食材</th>
                     <th class="deadline_header">期限</th>
+                    <th class="heart_header"></th>
                     <th class="heart_header"></th>
                 </tr>
                 <% @public_foods.each do |fridge| %>
@@ -60,12 +61,12 @@
                                 <div style="display:none;">2</div>
                             <% end %>
                         </td>
-                         <td class="reply">
-                            <div class="rep">ﾘﾌﾟ</div>
+                         <td class="reply" width="200">
+                            <div class="rep">リプライ</div>
                             <ul class="reply_list">
                             <% fridge.replies.each do |re| %>
                                 <li>
-                                    [返]<%= re.user.username %>：<%= re.content %>
+                                    <%= re.user.username %>：<%= re.content %>
                                 </li>
                             <% end %>
                             </ul>
@@ -129,11 +130,11 @@
                             <% end %>
                         </td>
                         <td class="reply">
-                            <div>ﾘﾌﾟ</div>
+                            <div>リプライ</div>
                             <% fridge.replies.each do |re| %>
-                                <p>
-                                    [返]<%= re.user.username %>：<%= re.content %>
-                                </p>
+                                <li>
+                                    <%= re.user.username %>：<%= re.content %>
+                                </li>
                             <% end %>
                         </td>
                     </tr>

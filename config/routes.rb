@@ -18,4 +18,6 @@ Rails.application.routes.draw do
     member {get "follow","nofollow","refollow","norefollow","block"}
   end
   resources :bulletin_boards
+
+  get '*anything' => 'errors#routing_error'
 end
