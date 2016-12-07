@@ -13,6 +13,7 @@
   <link href="modal.css" rel="stylesheet">
 </head>
 <body>
+  <div id="wrapper">
 	<header>
     <nav>
     <div id="modal-content">
@@ -30,20 +31,22 @@
       <!-- モーダルウィンドウのコンテンツ終了 -->
     </div>
     <p>
-      <a id="modal-open"><%= image_tag("modal.png", :class => "setPosition", :width => '200', :height => '200' ) %></a>
-      <%= image_tag("banner.png", :width => '800', :height => '300') %>
-      <%= link_to image_tag('logout.png', :width => '300', :height => '300'), destroy_user_session_path, method: :delete, data: { confirm: 'ログアウトしますか？' } %>
+      <a id="modal-open">
+        <%= image_tag("modal.png", :class => "modalimage", :align => 'left') %>
+      </a>
+        <%= image_tag("banner.png", :class => "bannerimage", :align => 'center') %>
+        <%= link_to image_tag('logout.png', :class => "logoutimage", :align => 'right'), destroy_user_session_path, method: :delete, data: { confirm: 'ログアウトしますか？' } %>
     </p>
     <!-- ここまでモーダルウィンドウ -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="modal.js"></script>
     </nav>
-
   </header>
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
   <main id="contents" >
     <%= yield %>
   </main>
+  </div>
 </body>
 </html>
