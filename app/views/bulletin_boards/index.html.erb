@@ -1,153 +1,148 @@
 <div class="tabbox">
-    <h1>掲示板</h1>
+    <h1>共有ボード</h1>
     <select name="sort_menu" id="sort_menu">
         <option id="public_order" value=0 src="/bulletin_boards" selected>公開順</option>
         <option id="user_name_order" value="1">人の名前順</option>
         <option id="deadline_order" value="2">期限近い順</option>
-    </select> 
-    <div id="tab1" class="tab"></br>
-        <% if @public_foods || @public_fresh then %>
-            <table border="1">
-                <tr>
-                    <th class="arrow_header">返信</th>
-                    <th class="user_name_header">ユーザ名</th>
-                    <th class="foods_header">食材</th>
-                    <th class="deadline_header">期限</th>
-                    <th class="heart_header"></th>
-                    <th class="heart_header"></th>
-                </tr>
-                <% @public_foods.each do |fridge| %>
-                    <tr class="foods_article">
-                        <td class="arrow">
-                            <%= link_to '→', "#reply" %>
-                            <div id="modal_content">
-                                <% @reply = Reply.new %>
+    </select>
 
-                                <%= form_for(@reply) do |f| %>
-                                    <% if @reply.errors.any? %>
-                                        <div id="error_explanation">
-                                            <h2><%= pluralize(@reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
-
-                                            <ul>
-                                                <% @reply.errors.full_messages.each do |message| %>
-                                                    <li><%= message %></li>
-                                                <% end %>
-                                            </ul>
-                                        </div>
-                                    <% end %>
-
-                                    <%= f.hidden_field :refrigerator_id, :value => fridge.id %> 
-                                    <%= f.hidden_field :user_id, :value => current_user.id %>
-                                    <%= f.text_area :content %>
-                                    <%= f.submit "送信" %>
-                                <% end %>
-                            </div>
-                        </td>
-                        <td class="user_name"><%= fridge.user.username %></td>
-                        <td class="foods"><%= fridge.name %></td>
-                        <td class="deadline"><%= fridge.deadline %></td>
-                        <td class="heart">
-                            <% if @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id) %>
-                                <div>[♥︎]</div>
-                                <div style="display:none;">1</div>
-                                <div style="display:none;"><%= list_path(@list) %></div>
-                            <% elsif fridge.user != current_user %>
-                                <div>[♡]</div>
-                                <div style="display:none;">0</div>
-                                <div style="display:none;"><%= lists_path(fid: fridge.id) %></div>
-                                <!-- <#%= link_to '[♡]', lists_path(fid: fridge.id), method: :post %> -->
-                            <% else %>
-                                <%= "#{List.where(refrigerator_id: fridge.id).count}人" %>
-                                <div style="display:none;">2</div>
-                            <% end %>
-                        </td>
-                         <td class="reply" width="200">
-                            <div class="rep">リプライ</div>
-                            <ul class="reply_list">
-                            <% fridge.replies.each do |re| %>
-                                <li>
-                                    <%= re.user.username %>：<%= re.content %>
-                                </li>
-                            <% end %>
-                            </ul>
-                        </td>
-                    </tr> 
+    <div id="tab1" class="tab_board"></br>
+    <% if @public_foods || @public_fresh then %>
+        <table class="tab_table">
+        <tr>
+            <th class="arrow_header">返信</th>
+            <th class="user_name_header">ユーザ名</th>
+            <th class="foods_header">食材</th>
+            <th class="deadline_header">期限</th>
+            <th class="heart_header">ファボ</th>
+            <th class="reply_header">クリックで開く</th>
+        </tr>
+        <% @public_foods.each do |fridge| %>
+        <tr class="foods_article">
+            <td class="arrow">
+                <%= link_to '→', "#reply" %>
+                <div id="modal_content">
+                <% @reply = Reply.new %>
+                <%= form_for(@reply) do |f| %>
+                <% if @reply.errors.any? %>
+                    <div id="error_explanation">
+                    <h2><%= pluralize(@reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
+                   <ul>
+                    <% @reply.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                    </div>
                 <% end %>
-            </table>
-            <p>-----------------------------------------------------------</p>
-            <table>
-                <tr>
-                    <th class="arrow_header"></th>
-                    <th class="user_name_header">ユーザ名</th>
-                    <th class="foods_header">食材</th>
-                    <th class="deadline_header">期限</th>
-                    <th class="heart_header"></th>
-                </tr>
-                <% @public_fresh.each do |fridge| %>
-                    <tr class="fresh_article" >
-                        <td class="arrow">
-                            <%= link_to '→', "#reply" %>
-                            <div id="modal_content">
-                                <% @reply = Reply.new %>
-
-                                <%= form_for(@reply) do |f| %>
-                                    <% if @reply.errors.any? %>
-                                        <div id="error_explanation">
-                                            <h2><%= pluralize(@reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
-
-                                            <ul>
-                                                <% @reply.errors.full_messages.each do |message| %>
-                                                    <li><%= message %></li>
-                                                <% end %>
-                                            </ul>
-                                        </div>
-                                    <% end %>
-
-                                    <%= f.hidden_field :refrigerator_id, :value => fridge.id %> 
-                                    <%= f.hidden_field :user_id, :value => current_user.id %>
-                                    <%= f.text_area :content %>
-                                    <%= f.submit "送信" %>
-                                <% end %>
-                            </div>
-                        </td>
-                        <td class="user_name"><%= fridge.user.username %></td>
-                        <td class="foods"><%= fridge.name %></td>
-                        <td class="purchase"><%= fridge.purchase %></td>
-                        <td class="heart">
-                             <% if @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id) %>
-                                <div>[♥︎]</div>
-                                <div style="display:none;">1</div>
-                                <div style="display:none;"><%= list_path(@list) %></div>
-                                <!-- <#%= link_to '[♥︎]', list_path(@list), method: :delete %> -->
-                            <% elsif fridge.user != current_user %>
-                                <div>[♡]</div>
-                                <div style="display:none;">0</div>
-                                <div style="display:none;"><%= lists_path(fid: fridge.id) %></div>
-                                <!-- <#%= link_to '[♡]', lists_path(fid: fridge.id), method: :post %> -->
-                            <% else %>
-                                <%= "#{List.where(refrigerator_id: fridge.id).count}人" %>
-                                <div style="display:none;">2</div>
-                            <% end %>
-                        </td>
-                        <td class="reply">
-                            <div>リプライ</div>
-                            <% fridge.replies.each do |re| %>
-                                <li>
-                                    <%= re.user.username %>：<%= re.content %>
-                                </li>
-                            <% end %>
-                        </td>
-                    </tr>
-                    
+                <%= f.hidden_field :refrigerator_id, :value => fridge.id %> 
+                <%= f.hidden_field :user_id, :value => current_user.id %>
+                <%= f.text_area :content %>
+                <%= f.submit "送信" %>
                 <% end %>
-            </table>
-        <% else %>
-            <p>　なんもないよ　</p>
+                </div>
+            </td>
+            <td class="user_name" scope="row" class="even"><%= fridge.user.username %></td>
+            <td class="foods"><%= fridge.name %></td>
+            <td class="deadline" scope="row" class="even"><%= fridge.deadline %></td>
+            <td class="heart">
+                <% if @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id) %>
+                    <div>[　]</div>
+                    <div style="display:none;">1</div>
+                    <div style="display:none;"><%= list_path(@list) %></div>
+                <% elsif fridge.user != current_user %>
+                    <div>[☆]</div>
+                    <div style="display:none;">0</div>
+                    <div style="display:none;"><%= lists_path(fid: fridge.id) %></div>
+                    <!-- <#%= link_to '[♡]', lists_path(fid: fridge.id), method: :post %> -->
+                <% else %>
+                    <%= "#{List.where(refrigerator_id: fridge.id).count}人" %>
+                    <div style="display:none;">2</div>
+                <% end %>
+            </td>
+            <td class="reply" scope="row" class="even">
+                <div class="rep">リプライ</div>
+                <ul class="reply_list">
+                <% fridge.replies.each do |re| %>
+                <li>
+                    <%= re.user.username %>：<%= re.content %>
+                </li>
+                <% end %>
+                </ul>
+            </td>
+        </tr> 
         <% end %>
+        </table>
+        
+        <p>-------------------------------------------------------</p>
+        
+        <table class="tab_table">
+        <tr>
+            <th class="arrow_header"></th>
+            <th class="user_name_header">ユーザ名</th>
+            <th class="foods_header">食材</th>
+            <th class="deadline_header">期限</th>
+            <th class="heart_header">ファボ</th>
+            <th class="reply_header">クリックで開く</th>
+        </tr>
+        <% @public_fresh.each do |fridge| %>
+        <tr class="fresh_article" >
+            <td class="arrow">
+                <%= link_to '→', "#reply" %>
+                <div id="modal_content">
+                <% @reply = Reply.new %>
+                <%= form_for(@reply) do |f| %>
+                <% if @reply.errors.any? %>
+                    <div id="error_explanation">
+                    <h2><%= pluralize(@reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
+                    <ul>
+                        <% @reply.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                        <% end %>
+                    </ul>
+                </div>
+                <% end %>
+                <%= f.hidden_field :refrigerator_id, :value => fridge.id %> 
+                <%= f.hidden_field :user_id, :value => current_user.id %>
+                <%= f.text_area :content %>
+                <%= f.submit "送信" %>
+                <% end %>
+                </div>
+            </td>
+            <td class="user_name"><%= fridge.user.username %></td>
+            <td class="foods"><%= fridge.name %></td>
+            <td class="purchase"><%= fridge.purchase %></td>
+            <td class="heart">
+                <% if @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id) %>
+                    <div>[　]</div>
+                    <div style="display:none;">1</div>
+                    <div style="display:none;"><%= list_path(@list) %></div>
+                    <!-- <#%= link_to '[♥︎]', list_path(@list), method: :delete %> -->
+                <% elsif fridge.user != current_user %>
+                    <div>[☆]</div>
+                    <div style="display:none;">0</div>
+                    <div style="display:none;"><%= lists_path(fid: fridge.id) %></div>
+                    <!-- <#%= link_to '[♡]', lists_path(fid: fridge.id), method: :post %> -->
+                <% else %>
+                    <%= "#{List.where(refrigerator_id: fridge.id).count}人" %>
+                    <div style="display:none;">2</div>
+                <% end %>
+            </td>
+            <td class="reply">
+                <div>リプライ</div>
+                <% fridge.replies.each do |re| %>
+                <li>
+                    <%= re.user.username %>：<%= re.content %>
+                </li>
+                <% end %>
+            </td>
+        </tr>
+        <% end %>
+        </table>
+    <% else %>
+        <p>　なんもないよ　</p>
+    <% end %>
     </div>
-
-
-</div><!-- tabbox -->
+</div><!-- 1番外のdivタグ[tabbox] -->
 
 <div id="modal_overlay"></div>
 <%= hidden_field_tag("authenticity_token", form_authenticity_token()) %>
@@ -155,3 +150,5 @@
 <script type="text/javascript">
     set();
 </script>
+
+<!-- ここより上を消すな -->

@@ -21,14 +21,14 @@ function set(){
                 changeFav.done(function(response){ console.log("delete done"); });
                 changeFav.fail(function(response){ console.log("delete error"); });
                 changeFav.always(function(response){ console.log("delete complete"); });
-                $(this).children().eq(0).text("[♡]")
+                $(this).children().eq(0).text("[☆]")
                 $(this).children().eq(1).text("0")
             } else if($(this).children().eq(1).text() == 0){
                 changeFav = ajaxPost($(this).children().eq(2).text())
                 changeFav.done(function(response){ console.log("post done"); });
                 changeFav.fail(function(response){ console.log("post error"); });
                 changeFav.always(function(response){ console.log("post complete"); });
-                $(this).children().eq(0).text("[♥︎]")
+                $(this).children().eq(0).text("[　]")
                 $(this).children().eq(1).text("1")
             }
         })
