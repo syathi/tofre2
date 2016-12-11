@@ -2,14 +2,12 @@ var tabwin1;
 
 function set(){
     var originTab1 = $("#tab1").clone(true)
-    //console.log(hooge)
     tabwin1 = document.getElementById("tab1")
 
     $(function() {
 
         /*リプライを見るボタンの処理*/
         $(".reply").click(function() {
-            console.log("ripu")
             $(this).children(".rep").next().slideToggle();
         })
 
@@ -17,17 +15,28 @@ function set(){
         $(".heart").click(function() {
             var changeFav
             if($(this).children().eq(1).text() == 1){
-                changeFav = ajaxDelete($(this).children().eq(2).text())
-                changeFav.done(function(response){ console.log("delete done"); });
-                changeFav.fail(function(response){ console.log("delete error"); });
-                changeFav.always(function(response){ console.log("delete complete"); });
+                changeFav = ajaxDelete($(this).children().eq(4).text(), $(this).children().eq(2).text(), $(this).children().eq(3).text())
+                changeFav.done(function(response){ console.log("delete_flag true done"); });
+                changeFav.fail(function(response){ console.log("delete_flag true error"); });
+                changeFav.always(function(response){ 
+                    console.dir(response)
+                    console.log("delete_flag true complete"); 
+                });
                 $(this).children().eq(0).text("[♡]")
                 $(this).children().eq(1).text("0")
             } else if($(this).children().eq(1).text() == 0){
-                changeFav = ajaxPost($(this).children().eq(2).text())
-                changeFav.done(function(response){ console.log("post done"); });
-                changeFav.fail(function(response){ console.log("post error"); });
-                changeFav.always(function(response){ console.log("post complete"); });
+                url = $(this).children().eq(4)
+                changeFav = ajaxPost(url.text(), $(this).children().eq(2).text(), $(this).children().eq(3).text())
+                changeFav.done(function(response){ console.log("delete_flag false done"); });
+                changeFav.fail(function(response){ console.log("delete_flag false error"); });
+                changeFav.always(function(response){ 
+                    console.log($(this))
+                    parsedObj = JSON.parse(response)
+                    console.log(parsedObj)
+                    url.text("/lists/" + parsedObj.id)
+                    console.log(url.text())
+                    console.log("delete_flag false complete");
+                 });
                 $(this).children().eq(0).text("[♥︎]")
                 $(this).children().eq(1).text("1")
             }
@@ -42,9 +51,6 @@ function set(){
 
             //オーバーレイ用のHTMLコードを、[body]内の最後に生成する
             $("#contents").append('<div id="modal_overlay" id="genuine"></div>');
-            //[$modal-overlay]をフェードインさせる
-            // $("#modal_overlay").css("display", "block")
-            // $("#modal_content").css("display", "block")
             $("#modal_overlay").fadeIn("slow");
             $("#modal_content").fadeIn("slow");
             centeringModalSyncer()
@@ -119,8 +125,6 @@ function set(){
             } 
         });
 
-
-
     });
 
 }
@@ -166,26 +170,46 @@ function centeringModalSyncer(){
 
 }
 
-function ajaxDelete(reqUrl) {
+function ajaxDelete(reqUrl, fridge_id, current_user_id) {
+    
+    reqUrl = reqUrl.replace(".", "/")
     console.log(reqUrl)
+    console.log(fridge_id)
+    console.log(current_user_id)
     return $.ajax({
         type:'POST',
         data: {              
-            "_method": "delete",
-            "authenticity_token": $("#authenticity_token").val()
+            "_method": "PATCH",
+            "authenticity_token": $("#authenticity_token").val(),
+            "refrigerator_id": fridge_id,
+            "user_id": current_user_id, 
+            "delete_flag": true
         },
         url:reqUrl,
         dataType: 'html'
     });
 }
 
-function ajaxPost(reqUrl) {
+function ajaxPost(reqUrl, fridge_id, current_user_id) {
+    var method = ""
+    if(reqUrl.match(/\d+/)){
+        reqUrl = reqUrl.replace(".", "/")
+        method = "PATCH"
+    } else {
+        reqUrl += ".json"
+        method = "POST"
+    }
     console.log(reqUrl)
+    console.log(fridge_id)
+    console.log(current_user_id)
     return $.ajax({
-        type:'POST',
+        type:'POST',//既にlistのデータがある場合はpatchにしないと行けない
         data: {   
-            "_method": "post",
-            "authenticity_token": $("#authenticity_token").val()
+            "_method": method,
+            "authenticity_token": $("#authenticity_token").val(),
+            "refrigerator_id": fridge_id,
+            "user_id": current_user_id, 
+            "delete_flag": false
         },
         url:reqUrl,
         dataType: 'html'

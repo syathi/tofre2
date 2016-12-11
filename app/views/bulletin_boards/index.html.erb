@@ -27,7 +27,6 @@
                                     <% if @reply.errors.any? %>
                                         <div id="error_explanation">
                                             <h2><%= pluralize(@reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
-
                                             <ul>
                                                 <% @reply.errors.full_messages.each do |message| %>
                                                     <li><%= message %></li>
@@ -35,7 +34,6 @@
                                             </ul>
                                         </div>
                                     <% end %>
-
                                     <%= f.hidden_field :refrigerator_id, :value => fridge.id %> 
                                     <%= f.hidden_field :user_id, :value => current_user.id %>
                                     <%= f.text_area :content %>
@@ -50,11 +48,18 @@
                             <% if @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id, delete_flag: false) %>
                                 <div>[♥︎]</div>
                                 <div style="display:none;">1</div>
-                                <div style="display:none;"><%= list_path(@list) %></div>
+                                 <div><%= fridge.id %></div>
+                                 <div><%= current_user.id %></div>
+                                <div ><%= lists_path(@list) %></div>
                             <% elsif fridge.user != current_user %>
+                                <% if List.find_by(refrigerator_id: fridge.id, user_id: current_user.id, delete_flag: true) %>
+                                    <% @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id, delete_flag: true) %>
+                                <% end %>
                                 <div>[♡]</div>
                                 <div style="display:none;">0</div>
-                                <div style="display:none;"><%= lists_path(fid: fridge.id) %></div>
+                                <div><%= fridge.id %></div>
+                                <div><%= current_user.id %></div>
+                                <div ><%= lists_path(@list) %></div>
                                 <!-- <#%= link_to '[♡]', lists_path(fid: fridge.id), method: :post %> -->
                             <% else %>
                                 <%= "#{List.where(refrigerator_id: fridge.id).count}人" %>

@@ -24,15 +24,14 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @list = List.new(user_id: current_user.id, refrigerator_id: params[:fid])
-
+    @list = List.new(user_id: current_user.id, refrigerator_id: params["refrigerator_id"])
     respond_to do |format|
       if @list.save
         if @list.refrigerator_id
+          format.json { render status: :created, json: @list }
           format.html { redirect_to bulletin_boards_path, notice: 'リストを新規作成しました。' }
-          format.json { render bulletin_boards_path, status: :created, location: @list }
         else
-          format.html { redirect_to events_path, notice: 'リストを新規作成しました。' }
+          #format.html { redirect_to events_path, notice: 'リストを新規作成しました。' }
           format.json { render events_path, status: :created, location: @list }
         end
       else
@@ -46,7 +45,7 @@ class ListsController < ApplicationController
   # PATCH/PUT /lists/1.json
   def update
     respond_to do |format|
-      if @list.update(list_params)
+      if @list.update_attributes(delete_flag: params["delete_flag"])
         format.html { redirect_to @list, notice: 'リストを更新しました。' }
         format.json { render :show, status: :ok, location: @list }
       else
