@@ -48,18 +48,18 @@
                             <% if @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id, delete_flag: false) %>
                                 <div>[♥︎]</div>
                                 <div style="display:none;">1</div>
-                                 <div><%= fridge.id %></div>
-                                 <div><%= current_user.id %></div>
-                                <div ><%= lists_path(@list) %></div>
+                                <div style="display:none;"><%= fridge.id %></div>
+                                <div style="display:none;"><%= current_user.id %></div>
+                                <div style="display:none;"><%= lists_path(@list) %></div>
                             <% elsif fridge.user != current_user %>
                                 <% if List.find_by(refrigerator_id: fridge.id, user_id: current_user.id, delete_flag: true) %>
                                     <% @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id, delete_flag: true) %>
                                 <% end %>
                                 <div>[♡]</div>
                                 <div style="display:none;">0</div>
-                                <div><%= fridge.id %></div>
-                                <div><%= current_user.id %></div>
-                                <div ><%= lists_path(@list) %></div>
+                                <div style="display:none;"><%= fridge.id %></div>
+                                <div style="display:none;"><%= current_user.id %></div>
+                                <div style="display:none;"><%= lists_path(@list) %></div>
                                 <!-- <#%= link_to '[♡]', lists_path(fid: fridge.id), method: :post %> -->
                             <% else %>
                                 <%= "#{List.where(refrigerator_id: fridge.id).count}人" %>
