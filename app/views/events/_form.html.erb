@@ -17,20 +17,28 @@
       <%= refrigerator.name %><br>
     <% end %>
   </div>
+  <%= @myrefri %>
   <div class="field">
-    <%= f.label :place %><br>
+    <%= f.label :place, "場所" %><br>
     <%= f.text_area :place %>
   </div>
   <div class="field">
-    <%= f.label :date %><br>
-    <%= f.datetime_select :date %>
-  </div>
+      <%= f.label :date , "日時" %><br>
+      <%= raw sprintf(
+              f.date_select(
+                  :date,
+                  use_month_numbers: true,
+                  start_year:        (Time.now.year),
+                  end_year:          (Time.now.year + 20),
+                  default:           Date.new(Time.now.year, 1, 1),
+                  date_separator:    '%s'), '年 ', '月 ') + '日' %>
+    </div>
   <div class="field">
-    <%= f.label :upper_num %><br>
+    <%= f.label :upper_num, "最大人数" %><br>
     <%= f.number_field :upper_num %>
   </div>
   <div class="field">
-    <%= f.label :lower_num %><br>
+    <%= f.label :lower_num, "最低人数" %><br>
     <%= f.number_field :lower_num %>
   </div>
   <div class="actions">

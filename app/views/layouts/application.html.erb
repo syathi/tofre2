@@ -19,12 +19,22 @@
     <div id="modal-content">
       <% if user_signed_in? %>
         <!-- モーダルウィンドウのコンテンツ開始 -->
-        <ul id="nav">
+        <!--<ul id="nav">
           <li><strong><%= link_to current_user.username+'さん', top_show_path %></strong></li>
           <li><%= link_to '冷蔵庫', refrigerators_path %></li>
           <li><%= link_to '掲示板', bulletin_boards_path %></li>
           <li><%=link_to "レシピ", donuts_path %></li>
-        </ul>
+        </ul>-->
+        <table class="modal_table">
+          <tr>
+            <td><%= link_to image_tag('user.png'), top_show_path %></td>
+            <td><%= link_to image_tag('refrigerator.png'), refrigerators_path %></td>
+          </tr>
+          <tr>
+            <td><%= link_to image_tag('share_board.png'), bulletin_boards_path %></td>
+            <td><%= link_to image_tag('recipe.png'), donuts_path %></td>
+          </tr>
+        </table>
         <br />
       <% end %>
       <p><a id="modal-close" class="button-link">閉じる</a></p>

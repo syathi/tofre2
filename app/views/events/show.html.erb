@@ -1,9 +1,8 @@
-<div class="font-default">
-<p id="notice"><%= notice %></p>
+<div>
 
 <p>
   <strong>食材:</strong>
-  <% Refrigerator.where(event_id: @event).each do |re| %>
+  <% @event.refrigerators.each do |re| %>
     <br><%= re.name %> (by <%= re.user.username%>)
     <% if re.user == current_user %>
       <%= link_to '[取消]', addition_event_path(@event, refri: re.id, dele: 1) %>
@@ -19,7 +18,7 @@
 </p>
 
 <p>
-  <strong>Place:</strong>
+  <strong>場所:</strong>
   <%= @event.place %>
 </p>
 
@@ -32,20 +31,20 @@
 </p>
 
 <p>
-  <strong>Date:</strong>
-  <%= @event.date %>
+  <strong>日時:</strong>
+  <%= @event.date.to_date %>
 </p>
 
 <p>
-  <strong>Upper num:</strong>
+  <strong>最大人数:</strong>
   <%= @event.upper_num %>
 </p>
 
 <p>
-  <strong>Lower num:</strong>
+  <strong>最低人数:</strong>
   <%= @event.lower_num %>
 </p>
 
-<%= link_to '編集', edit_event_path(@event) %> |
+<%= link_to '変更', edit_event_path(@event) %> |
 <%= link_to '戻る', events_path %>
 </div>

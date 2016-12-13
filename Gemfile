@@ -52,7 +52,7 @@ group :development do
 end
 
 #yarita 
-gem 'pry'
+
 gem 'gon'
 
 #sugaya

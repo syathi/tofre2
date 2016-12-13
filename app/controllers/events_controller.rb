@@ -50,6 +50,14 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
+        #元の関連を削除した上で更新
+        Refrigerator.where(user_id: current_user.id, event_id: @event.id).each do |re|
+          re.update_attributes(event_id: nil)
+        end
+        params[:refri][:id].each do |refrigerator_id|
+          @refrigerator = Refrigerator.find(refrigerator_id)
+          @refrigerator.update_attributes(event_id: @event.id)
+        end
         format.html { redirect_to @event, notice: 'イベントを更新しました。' }
         format.json { render :show, status: :ok, location: @event }
       else
