@@ -56,8 +56,9 @@ ActiveRecord::Schema.define(version: 20161012050832) do
     t.integer  "refrigerator_id"
     t.integer  "user_id"
     t.integer  "event_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.boolean  "delete_flag",     default: false, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "lists", ["event_id"], name: "index_lists_on_event_id"

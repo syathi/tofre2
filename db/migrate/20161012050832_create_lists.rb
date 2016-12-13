@@ -5,6 +5,8 @@ class CreateLists < ActiveRecord::Migration
       t.belongs_to :user, index: true, foreign_key: true
       t.belongs_to :event, index: true, foreign_key: true
 
+      t.boolean :delete_flag, default: false, null: false
+
       t.timestamps null: false
     end
   end

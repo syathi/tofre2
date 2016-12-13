@@ -1,31 +1,50 @@
-<div class="font-default">
-<p id="notice"><%= notice %></p>
+<div>
 
 <p>
-  <strong>Refrigerator:</strong>
-  <%= @event.refrigerator %>
+  <strong>食材:</strong>
+  <% @event.refrigerators.each do |re| %>
+    <br><%= re.name %> (by <%= re.user.username%>)
+    <% if re.user == current_user %>
+      <%= link_to '[取消]', addition_event_path(@event, refri: re.id, dele: 1) %>
+    <% end %>
+  <% end %>
+
+  <% if List.find_by(user_id: current_user.id, event_id: @event.id, delete_flag: false) %>
+    <br><%= link_to '[食材追加]', event_path(add: "a") %>
+  <% end %>
+  <% if params[:add] %>
+    <br><%= render "addition" , eve: @event %>
+  <% end %>
 </p>
 
 <p>
-  <strong>Place:</strong>
+  <strong>場所:</strong>
   <%= @event.place %>
 </p>
 
 <p>
-  <strong>Date:</strong>
-  <%= @event.date %>
+  <strong>参加者</strong>
+  <%= @event.refrigerators.first.user.username %>
+  <% List.where(event_id: @event.id, delete_flag: false).each do |list| %>
+    ・<%= list.user.username %>
+  <% end %>
 </p>
 
 <p>
-  <strong>Upper num:</strong>
+  <strong>日時:</strong>
+  <%= @event.date.to_date %>
+</p>
+
+<p>
+  <strong>最大人数:</strong>
   <%= @event.upper_num %>
 </p>
 
 <p>
-  <strong>Lower num:</strong>
+  <strong>最低人数:</strong>
   <%= @event.lower_num %>
 </p>
 
-<%= link_to '編集', edit_event_path(@event) %> |
+<%= link_to '変更', edit_event_path(@event) %> |
 <%= link_to '戻る', events_path %>
 </div>

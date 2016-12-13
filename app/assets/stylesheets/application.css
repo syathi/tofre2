@@ -4,6 +4,12 @@
   font-family: 'Lucida Console', 'ヒラギノ角ゴ ProN W8';
   color: #835B0B;
 }
+div.event_left{
+  width: 100%;
+  margin: 20px;
+  padding: 0px;
+  text-align: left;
+}
 
 /* レシピ */
 div.right {
