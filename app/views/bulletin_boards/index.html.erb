@@ -1,3 +1,4 @@
+
 <div class="tabbox">
     <h1>掲示板</h1>
     <select name="sort_menu" id="sort_menu">
@@ -18,9 +19,9 @@
                 </tr>
                 <% @public_foods.each do |fridge| %>
                     <tr class="foods_article">
-                        <td class="arrow">
-                            <%= link_to '→', "#reply" %>
-                            <div id="modal_content">
+                        <td  class="arrow">
+                            <%= link_to '→', "#reply", :name => fridge.id %>
+                            <div id=<%= fridge.id.to_s %> class="modal_content" >
                                 <% @reply = Reply.new %>
 
                                 <%= form_for(@reply) do |f| %>
@@ -70,8 +71,10 @@
                             <div class="rep">リプライ</div>
                             <ul class="reply_list">
                             <% fridge.replies.each do |re| %>
+
                                 <li>
-                                    <%= re.user.username %>：<%= re.content %>
+
+                                    <%= re.user.id %>：<%= re.user.username %>：<%= re.content %>：<%= re.refrigerator.user.id %>：<%= re.refrigerator.name %>：<%= re.refrigerator.id %>
                                 </li>
                             <% end %>
                             </ul>
@@ -91,8 +94,8 @@
                 <% @public_fresh.each do |fridge| %>
                     <tr class="fresh_article" >
                         <td class="arrow">
-                            <%= link_to '→', "#reply" %>
-                            <div id="modal_content">
+                            <%= link_to '→', "#reply", :name => fridge.id %>
+                            <div id=<%= fridge.id.to_s %> class="modal_content" >
                                 <% @reply = Reply.new %>
 
                                 <%= form_for(@reply) do |f| %>
@@ -139,13 +142,15 @@
                                 <div style="display:none;">2</div>
                             <% end %>
                         </td>
-                        <td class="reply">
-                            <div>リプライ</div>
+                        <td class="reply" width="200">
+                            <div class="rep">リプライ</div>
+                            <ul class="reply_list">
                             <% fridge.replies.each do |re| %>
                                 <li>
                                     <%= re.user.username %>：<%= re.content %>
                                 </li>
                             <% end %>
+                            </ul>
                         </td>
                     </tr>
                     

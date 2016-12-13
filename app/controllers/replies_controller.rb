@@ -25,7 +25,6 @@ class RepliesController < ApplicationController
   # POST /replies.json
   def create
     @reply = Reply.new(reply_params)
-
     respond_to do |format|
       if @reply.save
         format.html { redirect_to bulletin_boards_path }
