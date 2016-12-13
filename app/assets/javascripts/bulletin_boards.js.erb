@@ -19,7 +19,6 @@ function set(){
                 changeFav.done(function(response){ console.log("delete_flag true done"); });
                 changeFav.fail(function(response){ console.log("delete_flag true error"); });
                 changeFav.always(function(response){ 
-                    console.dir(response)
                     console.log("delete_flag true complete"); 
                 });
                 $(this).children().eq(0).text("[♡]")
@@ -30,11 +29,8 @@ function set(){
                 changeFav.done(function(response){ console.log("delete_flag false done"); });
                 changeFav.fail(function(response){ console.log("delete_flag false error"); });
                 changeFav.always(function(response){ 
-                    console.log($(this))
                     parsedObj = JSON.parse(response)
-                    console.log(parsedObj)
                     url.text("/lists/" + parsedObj.id)
-                    console.log(url.text())
                     console.log("delete_flag false complete");
                  });
                 $(this).children().eq(0).text("[♥︎]")
@@ -45,18 +41,19 @@ function set(){
         /*矢印(リプライ)ボタンの処理*/
         $(".arrow").click(function() {
             id = $(this).children()[1].innerText
+            console.log($(this)[0].childNodes[1].name)
             //キーボード操作などにより、オーバーレイが多重起動するのを防止する
             $(this).blur() ;    //ボタンからフォーカスを外す
             if($("#modal_overlay")[1]) return false ;       //新しくモーダルウィンドウを起動しない 
 
-            //オーバーレイ用のHTMLコードを、[body]内の最後に生成する
             $("#contents").append('<div id="modal_overlay" id="genuine"></div>');
             $("#modal_overlay").fadeIn("slow");
-            $("#modal_content").fadeIn("slow");
+            var modal = "#" + $(this)[0].childNodes[1].name
             centeringModalSyncer()
+            $(modal).fadeIn("slow");
         })
-        $("#modal_overlay,#modal_close").click(function(){
-            $("#modal_content,#modal_overlay").fadeOut("slow",function(){
+        $("#modal_overlay,#modal_close").off().click(function(){
+            $(".modal_content,#modal_overlay").fadeOut("slow",function(){
                 $("#genuine").remove()
             })
         })
@@ -151,10 +148,10 @@ function centeringModalSyncer(){
     var h = $(window).height();
 
     //コンテンツ(#modal-content)の幅を取得し、変数[cw]に格納
-    var cw = $("#modal-content").outerWidth({margin:true});
+    var cw = $(".modal-content").outerWidth({margin:true});
 
     //コンテンツ(#modal-content)の高さを取得し、変数[ch]に格納
-    var ch = $("#modal-content").outerHeight({margin:true});
+    var ch = $(".modal-content").outerHeight({margin:true});
 
     //コンテンツ(#modal-content)を真ん中に配置するのに、左端から何ピクセル離せばいいか？を計算して、変数[pxleft]に格納
     var pxleft = ((w - cw)/2);
@@ -163,10 +160,10 @@ function centeringModalSyncer(){
     var pxtop = ((h - ch)/2);
 
     //[#modal-content]のCSSに[left]の値(pxleft)を設定
-    $("#modal-content").css({"left": pxleft + "px"});
+    $(".modal-content").css({"left": pxleft + "px"});
 
     //[#modal-content]のCSSに[top]の値(pxtop)を設定
-    $("#modal-content").css({"top": pxtop + "px"});
+    $(".modal-content").css({"top": pxtop + "px"});
 
 }
 
